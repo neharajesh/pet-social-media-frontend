@@ -1,13 +1,12 @@
-// import { useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { Topbar } from "./Topbar"
 
 export const Layout = ({children}) => {
-    // const { theme } = useSelector(state => state.theme)
+    const { theme } = useSelector(state => state.theme)
     return (<>
         <div className="appContainer">
             <Topbar />
-            <div className="pageContainer lightTheme"> {children} </div>
-            {/* <div className={theme==="dark" ? "pageContainer darkTheme" : "pageContainer lightTheme"}> {children} </div> */}
+            <div className={theme==="dark" ? "pageContainer darkTheme" : "pageContainer lightTheme"}> {children} </div>
         </div>
     </>)
 }

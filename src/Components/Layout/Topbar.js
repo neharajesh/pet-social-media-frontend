@@ -1,12 +1,12 @@
 import "./layout.css"
 import { Link } from "react-router-dom"
-// import { Theme } from "../../features/theme/Theme"
+import { Theme } from "../../features/Theme/Theme"
 
 export const Topbar = () => {
   return (
     <>
       <div className="topbar">
-          {/* <Theme /> */}
+          <Theme />
             <Link to="/" className="header-brand txt-700"> SOCIALMEDIA </Link> <br/>
             <div className="navContainer">
                 <Link className="navLink" to="/"> Home </Link>
