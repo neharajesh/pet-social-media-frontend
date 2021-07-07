@@ -1,0 +1,90 @@
+@import url("../../styles.css");
+
+.appContainer {
+    height: 100vh;
+    width: 100vw;
+}
+
+.topbar {
+    height: 5rem;
+    width: 100%;
+    background-color: var(--header-blue);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.pageContainer {
+    height: 90vh;
+    width: 100%;
+}
+
+.navContainer {
+    display: flex;
+}
+
+.header-brand {
+    font-size: 2rem; 
+    font-weight: bolder;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+
+.header-brand:hover {
+    background-color: pink;
+    background-image: linear-gradient(
+        45deg,
+        #CA4246 16.666%, 
+        #E16541 16.666%, 
+        #E16541 33.333%, 
+        #F18F43 33.333%, 
+        #F18F43 50%, 
+        #8B9862 50%, 
+        #8B9862 66.666%, 
+        #476098 66.666%, 
+        #476098 83.333%, 
+        #A7489B 83.333%);
+    background-size: 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}
+
+
+.navLink {
+    color: black;
+    text-decoration: none;    
+    display: flex;
+    justify-content: center;
+    margin: 0 1rem;
+}
+
+.navLink:hover {
+    background-color: pink;
+    background-image: linear-gradient(
+        45deg,
+        #CA4246 16.666%, 
+        #E16541 16.666%, 
+        #E16541 33.333%, 
+        #F18F43 33.333%, 
+        #F18F43 50%, 
+        #8B9862 50%, 
+        #8B9862 66.666%, 
+        #476098 66.666%, 
+        #476098 83.333%, 
+        #A7489B 83.333%);
+    background-size: 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}
+
+.navLink span {
+    font-size: 1.2em;
+    text-decoration: none;
+}
