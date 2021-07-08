@@ -55,11 +55,10 @@
 
 
 .navLink {
-    color: black;
+    color: inherit;
     text-decoration: none;    
     display: flex;
     justify-content: center;
-    margin: 0 1rem;
 }
 
 .navLink:hover {
@@ -87,4 +86,11 @@
 .navLink span {
     font-size: 1.2em;
     text-decoration: none;
+}
+
+.sidebarContainer {
+    width: 17rem;
+    height: 100vh;
+    background-color: var(--header-blue);
+    padding-top: 3rem;
 }

@@ -1,23 +1,42 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
+import toast, { Toaster } from "react-hot-toast"
+import { useDispatch, useSelector } from "react-redux"
+import { Link, useNavigate } from "react-router-dom"
+import { signinUser } from "./authSlice"
 
 export const Login = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const auth = useSelector(state => state.auth)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-    const submitButtonHandler = () => {
-        //loginRequest(username, password);
-        console.log("username =", username)
-        console.log("password =", password)
-    }    
+    const submitButtonHandler = async() => {  
+        const response = await dispatch(signinUser({username: username, password: password}))
+        response.token === "" ? toast.error("Could not sign in") : toast.success("Signed in successfully")
+    }
+
+    useEffect(() => {
+        auth.token !== "" && navigate("/")
+    }, [auth])
     
     return(<>
-        <h1>Login Page</h1>
-        <label>Username <input type="text" onChange={(e) => setUsername(e.target.value)} /> </label>
-        <label>Password <input type="password" onChange={(e) => setPassword(e.target.value)} /> </label>
-        <button onClick={submitButtonHandler}> Submit </button>
-        <p>Username : {username}</p>
-        <p>Password : {password}</p>
-        <Link className="navLink" to="/signup"> Register </Link>
+        <div className="authPageContainer">
+            <Toaster />
+            <img className="authImage" src="https://freesvg.org/img/Dog-Breeds-Icons.png" alt="pet image" />
+            <div className="authContainer">
+                <h1> Login </h1>
+                <div className="inputContainer">
+                    <p> Username </p> 
+                    <input className="inputBox" type="text" onChange={(e) => setUsername(e.target.value)} />
+                </div>
+                <div className="inputContainer">
+                    <p> Password </p> 
+                    <input className="inputBox" type="password" onChange={(e) => setPassword(e.target.value)} />
+                </div>
+                <button className="submitButton" onClick={submitButtonHandler}> Submit </button>
+                <Link className="navLink" to="/signup"> Click here to Register </Link>
+            </div>
+        </div>
     </>)
 }

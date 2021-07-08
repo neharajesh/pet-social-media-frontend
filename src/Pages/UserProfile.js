@@ -1,8 +1,16 @@
-import { useParams } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { followUser } from "../features/Users/userSlice";
 import { dummyFeedData } from "./Feed";
 
 export const UserProfile = () => {
-    const { userId } = useParams();
+    const { userId } = useParams()
+    const dispatch = useDispatch()
+    const auth = useSelector(state => state.auth)
+    const followThisUser = async() => {
+        await dispatch(followUser(auth.user._id, userId))
+    }    
+
     return (<div className="homeContainer">
         <div className="w-50 flex-col flex-items-center-y">
             <div className="flex mg-05 pd-1 flex-items-center-y flex-space-evenly card-w-40">
@@ -14,7 +22,7 @@ export const UserProfile = () => {
                         <p> 📍 Location </p>
                         <p> 🎂 26 July </p>
                     </div>
-                    <button className="followButton"> Follow </button>
+                    <button onClick={() => followThisUser()} className="followButton"> Follow </button>
                 </div>
             </div>
             <div className="flex flex-space-between card-w-40 mg-tb-1">

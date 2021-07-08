@@ -57,3 +57,55 @@ body {
     cursor: pointer;
     margin-top: 0.5rem;
 }
+
+.authPageContainer {
+    display: flex;
+    place-items: center;
+    justify-content: space-evenly;
+}
+
+.authImage {
+    height: 100%;
+    width: 35rem;
+}
+
+.authContainer {
+    height: 100%;
+    width: 35rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.inputBox {
+    width: 68%;
+    padding: 0.8rem 1rem;
+    border: none;
+    border-bottom: 1px solid grey;
+    background-color: transparent;
+    color: inherit;
+}
+
+.inputBox:focus {
+    border: 1px solid grey;
+    border-radius: 3px;
+}
+
+.submitButton {
+    padding: 0.8rem 1rem;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 3px;
+    background-color: var(--header-blue);
+    cursor: pointer;
+}

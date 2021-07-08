@@ -1,33 +1,19 @@
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import "../styles.css";
 
-const usersList = [
-  {
-    userId: 1,
-    username: "one",
-  },
-  {
-    userId: 2,
-    username: "two",
-  },
-  {
-    userId: 3,
-    username: "three",
-  },
-  {
-    userId: 4,
-    username: "four",
-  },
-];
-
 export const Users = () => {
+    const users = useSelector(state => state.users)
+  
   return (
     <>
       <div>
         <h2> Pet Parents </h2>
         <div>
-          {usersList.map((user) => (
-            <div className="flex" key={user.userId}>
-              {user.username}
+          {users.usersList.map((user) => (
+            <div className="flex bdr-thin bdr-rad-m mg-1 pd-1" key={user._id}>
+              <Link to={`/user/${user._id}`}> { user.username } </Link>
+              {user.bio}
             </div>
           ))}
         </div>

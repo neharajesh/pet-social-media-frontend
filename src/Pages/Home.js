@@ -1,12 +1,13 @@
+import { useSelector } from "react-redux"
 import { Feed } from "./Feed"
-import { Users } from "./Users"
 
 export const Home = () => {
+    const auth = useSelector(state => state.auth)
+
     return (<>
         <div className="homeContainer">
-            <Users />
             <Feed />
-            <h1> Your Profile </h1>
+            <h1> hey {auth.user.username} </h1>
         </div>        
     </>)
 }
