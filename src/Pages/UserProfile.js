@@ -1,37 +1,53 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { PostCard } from "../Components/PostCard";
 import { followUser } from "../features/Users/userSlice";
-import { dummyFeedData } from "./Feed";
 
 export const UserProfile = () => {
     const { userId } = useParams()
+
     const dispatch = useDispatch()
     const auth = useSelector(state => state.auth)
-    const followThisUser = async() => {
-        await dispatch(followUser(auth.user._id, userId))
-    }    
+    const posts = useSelector(state => state.posts)
+    const users = useSelector(state => state.users)
 
-    return (<div className="homeContainer">
-        <div className="w-50 flex-col flex-items-center-y">
-            <div className="flex mg-05 pd-1 flex-items-center-y flex-space-evenly card-w-40">
-                <img src="https://picsum.photos/200" alt="profile picture" />
-                <div className="mg-l-2 flex-col flex-items-center-y">
-                    <p className="txt-xl txt-700 "> User Name </p>
+    const followThisUser = async() => {
+        const response = await dispatch(followUser(auth.user._id, userId))
+        console.log(response)
+    }
+
+    const currentUser = users.usersList.find(user => user._id === userId)
+
+    const currentUserPosts = posts.posts.filter(post => post.user === userId)
+
+    return (<div className="w-100 flex flex-space-evenly pd-t-2">
+        <div className="flex flex-space-between w-50 mg-tb-1">
+                {currentUserPosts.length === 0 && <p> Nothing to see here yet! </p>}
+                <div> {currentUserPosts.map(post => <PostCard post={post} />)} </div>
+        </div>
+        <div className="w-25 flex-col flex-items-center-y">
+            <div className="flex flex-col mg-05 mg-r-2 pd-1 flex-items-center-x flex-space-evenly card-w-20">
+                <img className="bdr-rad-round mg-1" src="https://picsum.photos/200" alt="profile picture" />
+                <div className="flex-col flex-items-center-y">
+                    <p className="txt-xl txt-700 "> {currentUser.username} </p>
                     <div className="mg-tb-05 txt-m txt-grey">
-                        <p> user bio goes here lorem ipsum </p>
-                        <p> 📍 Location </p>
-                        <p> 🎂 26 July </p>
+                        <p className="pd-025"> { currentUser.bio || "user bio goes here lorem ipsum"} </p>
+                        <p className="pd-025"> 📍 Location </p>
+                        <p className="pd-025"> 🎂 26 July </p>
+                        <div className="flex flex-items-center-x">
+                            <div className="flex-col flex-items-center-y mg-1">
+                                <p> {currentUser.following.length} </p>
+                                <p> Follows </p>
+                            </div>  
+                            <div className="flex-col flex-items-center-y mg-1">
+                                <p> {currentUser.followers.length} </p>
+                                <p> Followers </p>
+                            </div>
+                        </div>                  
                     </div>
                     <button onClick={() => followThisUser()} className="followButton"> Follow </button>
                 </div>
             </div>
-            <div className="flex flex-space-between card-w-40 mg-tb-1">
-                <div> Following </div>
-                {/* use postcard below */}
-                <div> {dummyFeedData.map(post => <div className="pd-05 bdr-thin bdr-rad-m mg-tb-05 card-w-30" key={post.id}>
-                    <p> {post.content} </p>
-                </div>)} </div>
-            </div>
-        </div>
+        </div>        
     </div>)
 }

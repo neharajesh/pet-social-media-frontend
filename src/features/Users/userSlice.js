@@ -11,7 +11,6 @@ export const loadAllUsers = createAsyncThunk("users/loadAllUsers", async() => {
 
 export const getUserById = createAsyncThunk("users/getUserById", async(userId) => {
     const response = await fetchUserById(userId)
-    console.log(response)
     if(response?.errMessage) {
         return { message: response.message, error: response.errMessage }
     }
@@ -20,7 +19,6 @@ export const getUserById = createAsyncThunk("users/getUserById", async(userId) =
 
 export const updateUser = createAsyncThunk("users/updateUser", async(userId, userDetails) => {
     const response = await updateUserDetails(userId, userDetails)
-    console.log(response)
     if(response?.errMessage) {
         return { message: response.message, error: response.errMessage }
     }
@@ -33,21 +31,25 @@ export const followUser = createAsyncThunk("users/followUser", async(userId, use
     if(response?.errMessage) {
         return { error: response.errMessage, message: response.message }
     }
+    if(!response.success) {
+        return { message: response.message, currentUser: {} }
+    }
     return { currentUser: response.data, message: response.message }
 })
 
 export const unfollowUser = createAsyncThunk("users/unfollowUser", async(userId, userToUnfollowId) => {
     const response = await unfollowUserById(userId, userToUnfollowId)
-    console.log(response)
     if(response?.errMessage) {
         return { error: response.errMessage, message: response.message }
+    }
+    if(!response.success) {
+        return { message: response.message, currentUser: {} }
     }
     return { currentUser: response.data, message: response.message }
 })
 
 export const deleteUser = createAsyncThunk("users/deleteUser", async(userId) => {
     const response = await deleteUserAccount(userId)
-    console.log(response)
     if(response?.errMessage) {
         return { error: response.errMessage, message: response.message }
     }

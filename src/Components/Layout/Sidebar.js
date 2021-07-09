@@ -11,8 +11,8 @@ export const Sidebar = () => {
 
     return(<>
         <div className="sidebarContainer">
-            <Link to="/" className="navLink mg-tb-05"> Home </Link>
-            <Link onClick={() => loadUsers()} to="/user" className="navLink mg-tb-05"> Find Users </Link>
+            <Link to="/" className="navLink mg-tb-05 txt-black"> Home </Link>
+            <Link onClick={() => loadUsers()} to="/user" className="navLink mg-tb-05 txt-black"> Find Users </Link>
         </div>
     </>)
 }

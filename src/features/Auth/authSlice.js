@@ -3,19 +3,18 @@ import { loginUser, registerUser } from "../../Api/AuthApi";
 
 export const signinUser = createAsyncThunk("auth/signinUser", async(userDetails) => {
     const response = await loginUser(userDetails)
-    console.log(response)
     if(response?.errMessage) {
-        console.log("Error occurred while signing in user")
         return { message: response.message, errMessage: response.errMessage }
+    }
+    if(!response.success) {
+        return { user: {}, token: "", message: response.message }
     }
     return { user: response.user, token: response.authToken, message: response.message }
 })
 
 export const signupUser = createAsyncThunk("auth/signupUser", async(userDetails) => {
     const response = await registerUser(userDetails)
-    console.log(response)
     if(response?.errMessage) {
-        console.log("Error occurred while signing up user")
         return { errMessage: response.errMessage, message: response.message }
     }
     return { message: response.message }

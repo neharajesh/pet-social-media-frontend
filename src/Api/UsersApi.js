@@ -4,7 +4,6 @@ import ROOT_URL from "./config"
 export const fetchAllUsers = async() => {
     try {
         const response = await axios.get(`${ROOT_URL}/user/`)
-        console.log(response.data)
         return response.data
     } catch (err) {
         console.log("Error fetching all users", err.message)
@@ -14,7 +13,6 @@ export const fetchAllUsers = async() => {
 export const fetchUserById = async(userId) => {
     try {
         const response = await axios.get(`${ROOT_URL}/user/${userId}`)
-        console.log(response.data)
         return response.data
     } catch (err) {
         console.log("Error fetching user by id", err.message)
@@ -32,7 +30,6 @@ export const updateUserDetails = async(userId, userDetails) => {
                 "Content-Type": "application/json",
             }
         })
-        console.log(response.data)
         return response.data
     } catch (err) {
         console.log("Error updating user details", err.message)
@@ -41,15 +38,14 @@ export const updateUserDetails = async(userId, userDetails) => {
 
 export const followUserById = async(currentUserId, userToFollowId) => {
     try {
-        const response = await axios.post(`${ROOT_URL}/user/${currentUserId}/follow`, {
-            userId: userToFollowId
+        const response = await axios.post(`${ROOT_URL}/user/${userToFollowId}/follow`, {
+            userId: currentUserId
         }, {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
             }
         })
-        console.log(response.data)
         return response.data
     } catch (err) {
         console.log("Error following user", err.message)
@@ -66,7 +62,6 @@ export const unfollowUserById = async(currentUserId, userToUnfollowId) => {
                 "Content-Type": "application/json",
             }
         })
-        console.log(response.data)
         return response.data
     } catch (err) {
         console.log("Error unfollowing user", err.message)
@@ -81,7 +76,6 @@ export const deleteUserAccount = async(userId) => {
                 "Content-Type": "application/json",
             }
         })
-        console.log(response.data)
         return response.data
     } catch (err) {
         console.log("Error deleting user accout", err.message)
