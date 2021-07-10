@@ -1,10 +1,18 @@
 import moment from "moment"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { likePostById } from "../features/Posts/postSlice"
 import "../styles.css"
 
 export const PostCard = ({post}) => {
+    const auth = useSelector(state => state.auth)
     const users = useSelector(state => state.users)
     const postOwner = users.usersList.find(user => user._id === post.user)
+    const dispatch = useDispatch()
+
+    const likeHandler = async(postId) => {
+        const response = await dispatch(likePostById(postId, auth.user._id))
+        console.log(response)
+    }
     
     return (<>
         <div className="bdr-thin bdr-rad-m bdr-grey mg-1 pd-1 card-w-30">
@@ -14,7 +22,7 @@ export const PostCard = ({post}) => {
             </div>            
             <p className="mg-1"> {post.content} </p>
             <div className="flex">
-                <p className="mg-05 pd-r-1"> 💗 {post.likes.length} </p>
+                <p className="mg-05 pd-r-1"> <span className="csr-point" onClick={() => likeHandler(post._id)}> 💗 </span> {post.likes.length} </p>
                 <p className="mg-05 pd-r-1"> 💬 {post.comments.length} </p>
                 <p className="mg-05 pd-r-1"> ⏳ {moment(post.createdAt).fromNow()} </p>
             </div>

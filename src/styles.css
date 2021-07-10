@@ -36,13 +36,6 @@ body {
     border-color: grey;
 }
 
-.homeContainer {
-    display: flex;
-    flex-direction: row;
-    place-content: center;
-    padding: 3rem;
-}
-
 .feedContainer {
     display: flex;
     flex-direction: column;

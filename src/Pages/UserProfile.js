@@ -20,12 +20,12 @@ export const UserProfile = () => {
 
     const currentUserPosts = posts.posts.filter(post => post.user === userId)
 
-    return (<div className="w-100 flex flex-space-evenly pd-t-2">
-        <div className="flex flex-space-between w-50 mg-tb-1">
+    return (<div className="w-100 flex flex-items-center-x pd-t-2">
+        <div className="flex flex-space-between card-w-30 mg-tb-1 mg-r-2">
                 {currentUserPosts.length === 0 && <p> Nothing to see here yet! </p>}
                 <div> {currentUserPosts.map(post => <PostCard post={post} />)} </div>
         </div>
-        <div className="w-25 flex-col flex-items-center-y">
+        <div className="w-25 flex-col flex-items-center-y mg-l-2">
             <div className="flex flex-col mg-05 mg-r-2 pd-1 flex-items-center-x flex-space-evenly card-w-20">
                 <img className="bdr-rad-round mg-1" src="https://picsum.photos/200" alt="profile picture" />
                 <div className="flex-col flex-items-center-y">
@@ -48,6 +48,6 @@ export const UserProfile = () => {
                     <button onClick={() => followThisUser()} className="followButton"> Follow </button>
                 </div>
             </div>
-        </div>        
+        </div>   
     </div>)
 }

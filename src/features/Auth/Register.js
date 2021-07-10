@@ -1,6 +1,7 @@
 import { useState } from "react"
 import toast, { Toaster } from "react-hot-toast"
 import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 import { signupUser } from "./authSlice"
 
 export const Register = () => {
@@ -34,6 +35,8 @@ export const Register = () => {
                     <input className="inputBox" type="password" onChange={(e) => setRetypePassword(e.target.value)} />
                 </div>
                 <button className="submitButton" onClick={submitButtonHandler} disabled={!(password === retypePassword)}> Submit </button>
+
+                <p> Already have an account? </p> <Link to="/signin" className="navLink"> Click here to Login </Link>
             </div>
         </div>
     </>)

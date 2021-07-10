@@ -21,6 +21,9 @@
 
 .navContainer {
     display: flex;
+    justify-content: space-evenly;
+    width: 18rem;
+    align-items: center;
 }
 
 .header-brand {
