@@ -1,13 +1,27 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { changeToDark, changeToLight } from "./themeSlice";
+import "./theme.css"
+import { useEffect, useState } from "react";
 
 export const Theme = () => {
+    const theme = useSelector(state => state.theme)
     const dispatch = useDispatch();
+    const [dark, setDark] = useState(true)
+
+    const themeHandler = () => {
+        dark ? dispatch(changeToLight()) : dispatch(changeToDark())
+    }
+
+    useEffect(() => themeHandler(), [dark])
 
     return (<>
-        <div>
-            <button className="pd-05" onClick={() => dispatch(changeToLight())}> Light Theme </button>
-            <button className="pd-05" onClick={() => dispatch(changeToDark())}> Dark Theme </button>
+        <div className="w-10">🌞  {" "}
+            <label class="switch"> 
+                <input type="checkbox" onChange={() => {                    
+                    setDark(dark => !dark)
+                }} />
+                <span class="slider round"></span>
+            </label>🌚
         </div>
     </>)
 }

@@ -23,7 +23,7 @@ export const Login = () => {
     return(<>
         <div className="authPageContainer">
             <Toaster />
-            <img className="authImage" src="https://freesvg.org/img/Dog-Breeds-Icons.png" alt="pet image" />
+            <img className="authImage" src="https://freesvg.org/img/Dog-Breeds-Icons.png" alt="pets" />
             <div className="authContainer">
                 <h1> Login </h1>
                 <div className="inputContainer">

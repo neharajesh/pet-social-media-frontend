@@ -1,1 +1,1 @@
-# SNS Frontend
+# SNS App Frontend

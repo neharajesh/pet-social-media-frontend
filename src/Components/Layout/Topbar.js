@@ -24,9 +24,10 @@ export const Topbar = () => {
       <div className="topbar">
           <Toaster />
           <Theme />
-            <Link to="/" className="header-brand txt-700"> SOCIALMEDIA </Link> <br/>
+            <Link to="/" className="header-brand txt-700"> PETCLUB </Link> <br/>
             {auth.token !== "" && <div className="navContainer">
                 <Link to="/" className="navLink mg-tb-05 txt-black"> Home </Link>
+                <Link to={`/user/${auth.user._id}`} className="navLink mg-tb-05 txt-black"> Me </Link> 
                 <Link onClick={() => loadUsers()} to="/user" className="navLink mg-tb-05 txt-black"> Find Users </Link>
                 <Link onClick={() => logoutHandler()} className="navLink" to="/signin"> Logout </Link>
             </div>}
