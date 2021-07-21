@@ -60,7 +60,7 @@ export const UserProfile = () => {
                             </div>
                         </div>                  
                     </div>
-                    <button onClick={() => followHandler()} className="followButton"> { buttonText } </button>
+                    <button onClick={() => followHandler()} className={userId===auth.user._id ? "display-none" : "followButton"}> { buttonText } </button>
                 </div>
             </div>
         </div>   
