@@ -58,7 +58,7 @@ export const deletePost = async(postId) => {
 
 export const likePost = async(postId, userId) => {
     try {
-        const response = await axios.post(`${ROOT_URL}/post/${postId}`, { userId: userId }, {
+        const response = await axios.post(`${ROOT_URL}/post/${postId}/like`, { userId: userId }, {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -72,7 +72,7 @@ export const likePost = async(postId, userId) => {
 
 export const commentPost = async(postId, userId, comment) => {
     try {
-        const response = await axios.post(`${ROOT_URL}/post/${postId}`, { userId: userId, comment: comment }, {
+        const response = await axios.post(`${ROOT_URL}/post/${postId}/comment`, { userId: userId, comment: comment }, {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",

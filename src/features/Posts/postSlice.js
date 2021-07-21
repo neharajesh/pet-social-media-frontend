@@ -41,16 +41,16 @@ export const deletePostById = createAsyncThunk("post/deletePostById", async(post
     return { currentPost: response.sentData, message: response.message }
 })
 
-export const likePostById = createAsyncThunk("post/likePostById", async(postId, userId) => {
-    const response = await likePost(postId, userId)
+export const likePostById = createAsyncThunk("post/likePostById", async(form) => {
+    const response = await likePost(form.postId, form.userId)
     if(response?.errMessage) {
         return { error: response.errMessage, message: response.message }
     }
     return { currentPost: response.data, message: response.message }
 })
 
-export const commentPostById = createAsyncThunk("post/commentPostById", async(postId, userId, comment) => {
-    const response = await commentPost(postId, userId, comment)
+export const commentPostById = createAsyncThunk("post/commentPostById", async(form) => {
+    const response = await commentPost(form.postId, form.userId, form.comment)
     if(response?.errMessage) {
         return { error: response.errMessage, message: response.message }
     }

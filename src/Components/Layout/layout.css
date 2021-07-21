@@ -17,6 +17,7 @@
 .pageContainer {
     height: 90vh;
     width: 100%;
+    overflow-y: scroll;
 }
 
 .navContainer {
