@@ -25,9 +25,8 @@ export const updateUser = createAsyncThunk("users/updateUser", async(userId, use
     return { currentUser: response.data, message: response.message }
 })
 
-export const followUser = createAsyncThunk("users/followUser", async(userId, userToFollowId) => {
-    const response = await followUserById(userId, userToFollowId)
-    console.log(response)
+export const followUser = createAsyncThunk("users/followUser", async(form) => {
+    const response = await followUserById(form.userId, form.userToFollowId)
     if(response?.errMessage) {
         return { error: response.errMessage, message: response.message }
     }
@@ -37,8 +36,8 @@ export const followUser = createAsyncThunk("users/followUser", async(userId, use
     return { currentUser: response.data, message: response.message }
 })
 
-export const unfollowUser = createAsyncThunk("users/unfollowUser", async(userId, userToUnfollowId) => {
-    const response = await unfollowUserById(userId, userToUnfollowId)
+export const unfollowUser = createAsyncThunk("users/unfollowUser", async(form) => {
+    const response = await unfollowUserById(form.userId, form.userToUnfollowId)
     if(response?.errMessage) {
         return { error: response.errMessage, message: response.message }
     }

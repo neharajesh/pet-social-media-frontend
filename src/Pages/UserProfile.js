@@ -16,12 +16,14 @@ export const UserProfile = () => {
 
     const followHandler = async() => {
         if(buttonText === "Follow") {
-            const response = await dispatch(followUser(auth.user._id, userId))
+            const form = {userId: auth.user._id, userToFollowId: userId}
+            const response = await dispatch(followUser(form))
             console.log("followed", response)
             setButtonText("Unfollow")
             toast.success("Following User")
         } else {
-            const response = await dispatch(unfollowUser(auth.user._id, userId))
+            const form = {userId: auth.user._id, userToUnfollowId: userId}
+            const response = await dispatch(unfollowUser(form))
             console.log("unfollowed", response)
             setButtonText("Follow")
             toast.success("Unfollowed User")
