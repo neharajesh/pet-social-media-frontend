@@ -17,20 +17,23 @@ export const UserProfile = () => {
     const followHandler = async() => {
         if(buttonText === "Follow") {
             const form = {userId: auth.user._id, userToFollowId: userId}
-            const response = await dispatch(followUser(form))
-            console.log("followed", response)
+            await dispatch(followUser(form))
+            setFollowers(followers => followers + 1)
             setButtonText("Unfollow")
             toast.success("Following User")
         } else {
             const form = {userId: auth.user._id, userToUnfollowId: userId}
-            const response = await dispatch(unfollowUser(form))
-            console.log("unfollowed", response)
+            await dispatch(unfollowUser(form))
+            setFollowers(followers => followers - 1)
             setButtonText("Follow")
             toast.success("Unfollowed User")
         }
     }
 
     const currentUser = users.usersList.find(user => user._id === userId)
+
+    const [ followers, setFollowers ] = useState(currentUser.followers.length)
+    const [ following, setFollowing ] = useState(currentUser.following.length)
 
     const currentUserPosts = posts.posts.filter(post => post.user === userId)
 
@@ -51,11 +54,11 @@ export const UserProfile = () => {
                         <p className="pd-025"> 🎂 26 July </p>
                         <div className="flex flex-items-center-x">
                             <div className="flex-col flex-items-center-y mg-1">
-                                <p> {currentUser.following.length} </p>
+                                <p> {following} </p>
                                 <p> Follows </p>
                             </div>  
                             <div className="flex-col flex-items-center-y mg-1">
-                                <p> {currentUser.followers.length} </p>
+                                <p> {followers} </p>
                                 <p> Followers </p>
                             </div>
                         </div>                  
