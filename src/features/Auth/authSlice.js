@@ -14,7 +14,7 @@ export const signinUser = createAsyncThunk("auth/signinUser", async(userDetails)
 
 export const signupUser = createAsyncThunk("auth/signupUser", async(userDetails) => {
     const response = await registerUser(userDetails)
-    if(response?.errMessage) {
+    if(!response.success) {
         return { errMessage: response.errMessage, message: response.message }
     }
     return { message: response.message }

@@ -12,8 +12,8 @@ export const Register = () => {
     const auth = useSelector(state => state.auth)
 
     const submitButtonHandler = async() => {
-        await dispatch(signupUser({username: username, password: password}))
-        auth.error === "" ? toast.error(auth.message) : toast.success(auth.message)
+        const response = await dispatch(signupUser({username: username, password: password}))
+        response.payload.message === "User signed up" ? toast.success("Registered Successfully") : toast.error(response.payload.message)
     }
 
     return (<>
