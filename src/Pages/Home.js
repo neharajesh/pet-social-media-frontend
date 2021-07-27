@@ -19,10 +19,14 @@ export const Home = () => {
     }
 
     const addNewPostHandler = async() => {
-        const postContent = { user: auth.user._id, content: newPostText }
-        await dispatch(addPost(postContent))
-        setModalOpen(false)
-        toast.success("New Post Added!")
+        if(newPostText === "") {
+            toast.error("New post content cannot be empty.")
+        } else {
+            const postContent = { user: auth.user._id, content: newPostText }
+            await dispatch(addPost(postContent))
+            setModalOpen(false)
+            toast.success("New Post Added!")
+        }        
     }
 
     return (<>
@@ -44,8 +48,8 @@ export const Home = () => {
                     <p className="mg-05"> How're you doing today? </p>
                     <input onChange={e => setNewPostText(e.target.value)} className="newPostTextbox" type="textBox" placeholder="Add New Post" />
                     <div>
-                        <button className="addPostButton" onClick={() => addNewPostHandler()}> Add Post </button>
-                        <button className="modalCloseButton" onClick={closeAddPostModal}> I'll do this later </button>
+                        <button onClick={() => addNewPostHandler()} className="modalButtons"> Add Post </button>
+                        <button onClick={closeAddPostModal} className="modalButtons"> I'll do this later </button>
                     </div>
                     
                 </Modal>

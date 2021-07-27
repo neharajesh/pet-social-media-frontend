@@ -160,14 +160,14 @@ body {
     border: 2px solid grey;
 }
 
-.addPostButton {
+.modalButtons {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 3px;
     margin: 1rem;
 }
 
-.modalCloseButton {
+.modalButtons {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 3px;
@@ -195,4 +195,39 @@ body {
 .commentInput:focus {
     border: 1px solid grey;
     border-radius: 3px;
+}
+
+.editInputContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    margin: 1rem;
+}
+
+.editInputElement {
+    width: 80%;
+    padding: 0.5rem 1rem;
+}
+
+.editInputElement:focus {
+    border: 2px solid grey;
+}
+
+.editDetailsModal {
+    width: 45rem;
+    height: 30rem;
+    margin-left: 20rem;
+    margin-top: 8rem;
+    padding: 1rem;
+    position: absolute;
+    top: 30;
+    left: 30;
+    border: 2px solid grey;
+    border-radius: 5px;
+    background-color: var(--header-blue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

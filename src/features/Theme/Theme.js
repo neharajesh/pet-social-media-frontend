@@ -1,10 +1,9 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { changeToDark, changeToLight } from "./themeSlice";
 import "./theme.css"
 import { useEffect, useState } from "react";
 
 export const Theme = () => {
-    const theme = useSelector(state => state.theme)
     const dispatch = useDispatch();
     const [dark, setDark] = useState(true)
 
@@ -12,6 +11,7 @@ export const Theme = () => {
         dark ? dispatch(changeToLight()) : dispatch(changeToDark())
     }
 
+    // eslint-disable-next-line
     useEffect(() => themeHandler(), [dark])
 
     return (<>

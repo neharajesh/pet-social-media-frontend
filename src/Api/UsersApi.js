@@ -23,7 +23,7 @@ export const updateUserDetails = async(userId, userDetails) => {
     try {
         const response = await axios.post(`${ROOT_URL}/user/${userId}`, {
             userId: userId,
-            userDetails
+            updates: userDetails
         }, {
             headers: {
                 Accept: "application/json",

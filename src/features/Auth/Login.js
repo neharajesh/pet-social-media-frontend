@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 import toast, { Toaster } from "react-hot-toast"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
-import { signinUser } from "./authSlice"
+import { signinUser, signupUser } from "./authSlice"
+import { generateRandomUsername } from "./Utils"
 
 export const Login = () => {
     const [username, setUsername] = useState("")
@@ -16,8 +17,22 @@ export const Login = () => {
         response.token === "" ? toast.error("Could not sign in") : toast.success("Signed in successfully")
     }
 
-    useEffect(() => {
+    const loginAsGuestHandler = async() => {
+        const username = generateRandomUsername()
+        console.log(username)
+        toast(`Logging in with username ${username}. 
+               Username cannot be changed. 
+               Password can be changed from your profile.`)
+        const registerResponse = await dispatch(signupUser({username: username, password: username}))
+        console.log(registerResponse)
+        const response = await dispatch(signinUser({username: username, password: username}))
+        console.log(response)
+        response.token === "" ? toast.error("Could not sign in") : toast.success("Signed in successfully")
+    }
+    
+    useEffect(() => {        
         auth.token !== "" && navigate("/")
+        // eslint-disable-next-line
     }, [auth])
     
     return(<>
@@ -35,6 +50,9 @@ export const Login = () => {
                     <input className="inputBox" type="password" onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <button className="submitButton" onClick={submitButtonHandler}> Submit </button>
+
+                <button onClick={() => loginAsGuestHandler()}> Login as Guest </button> 
+
                 <Link className="navLink" to="/signup"> Click here to Register </Link>
             </div>
         </div>

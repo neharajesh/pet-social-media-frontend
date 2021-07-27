@@ -19,6 +19,7 @@ function App() {
     useEffect(() => {
         dispatch(fetchAllPosts())
         dispatch(loadAllUsers())
+        // eslint-disable-next-line
     }, [posts.posts])
 
     return (<>

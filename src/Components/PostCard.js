@@ -1,6 +1,5 @@
-import { current } from "@reduxjs/toolkit"
 import moment from "moment"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { commentPostById, likePostById } from "../features/Posts/postSlice"
 import "../styles.css"
@@ -8,30 +7,32 @@ import "../styles.css"
 export const PostCard = ({post}) => {
     const auth = useSelector(state => state.auth)
     const users = useSelector(state => state.users)
-    const currentUser = users.usersList.find(user => user._id === post.user)
     const dispatch = useDispatch()
     const [ likes, setLikes ] = useState(post.likes.length)
     const [ comments, setComments ] = useState(post.comments)
     const [ newComment, setNewComment ] = useState("")
     const [ commentBox, setCommentBox ] = useState(false)
 
+    const commentBoxRef = useRef("")
+
     const getUserById = (userId) => {
         return users.usersList.find(user => user._id === userId)
     }
     const postOwner = getUserById(post.user)
 
-    const likeHandler = async(postId) => {
+    const likeHandler = async(postId) => {        
         const form = { postId: postId, userId: auth.user._id}
         const response = await dispatch(likePostById(form))
         console.log(response.payload)
         setLikes(response.payload.currentPost.likes.length)
     }
 
-    const commentHandler = async(postId) => {        
+    const commentHandler = async(postId) => {              
         const form = { postId: postId, userId: auth.user._id, comment: newComment }
         const response = await dispatch(commentPostById(form))
         console.log(response.payload)
         setComments(response.payload.currentPost.comments)
+        commentBoxRef.current.value = "" 
     }
     
     return (<>
@@ -57,7 +58,7 @@ export const PostCard = ({post}) => {
                 </div>
                 ))}
                 <div>
-                    <input onChange={e => setNewComment(e.target.value)} className="commentInput" type="text" placeholder="Add Comment" />  
+                    <input ref={commentBoxRef} onChange={e => setNewComment(e.target.value)} className="commentInput" type="text" placeholder="Add Comment" />  
                     <button className="pd-tb-05 pd-lr-1" onClick={() => commentHandler(post._id)}> Add </button>     
                 </div>
             </div>

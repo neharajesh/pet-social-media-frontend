@@ -17,8 +17,9 @@ export const getUserById = createAsyncThunk("users/getUserById", async(userId) =
     return { currentUser: response.data, message: response.message }
 })
 
-export const updateUser = createAsyncThunk("users/updateUser", async(userId, userDetails) => {
-    const response = await updateUserDetails(userId, userDetails)
+export const updateUser = createAsyncThunk("users/updateUser", async(form) => {
+    const response = await updateUserDetails(form.userId, form.userDetails)
+    console.log(response)
     if(response?.errMessage) {
         return { message: response.message, error: response.errMessage }
     }
