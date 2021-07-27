@@ -51,7 +51,7 @@ export const Login = () => {
                 </div>
                 <button className="submitButton" onClick={submitButtonHandler}> Submit </button>
 
-                <button onClick={() => loginAsGuestHandler()}> Login as Guest </button> 
+                <button className="loginGuestButton" onClick={() => loginAsGuestHandler()}> Login as Guest </button> 
 
                 <Link className="navLink" to="/signup"> Click here to Register </Link>
             </div>

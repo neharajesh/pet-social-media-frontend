@@ -231,3 +231,11 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+.loginGuestButton {
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    background-color: var(--header-blue);
+    border: none;
+    border-radius: 3px;
+}
