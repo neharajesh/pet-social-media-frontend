@@ -1,6 +1,3 @@
-//random name generator
-
-// declare all characters
 const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
 export const generateRandomUsername = () => {
