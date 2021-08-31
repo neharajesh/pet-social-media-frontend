@@ -20,9 +20,21 @@ export const signupUser = createAsyncThunk("auth/signupUser", async(userDetails)
     return { message: response.message }
 })
 
+let initialUserObj = {
+    _id: "",
+    isAdmin: false,
+    following: [],
+    followers: [],
+    username: "",
+    password: ""
+}
+
+let initialUser = localStorage.getItem("snsUser") ? JSON.parse(localStorage.getItem("snsUser")) : initialUserObj
+let initialToken = localStorage.getItem("snsToken") ? JSON.parse(localStorage.getItem("snsToken")) : ""
+
 const initialState = {
-    user: {},
-    token: "",
+    user: initialUser,
+    token: initialToken,
     error: "",
     loading: false,
     message: ""
@@ -33,6 +45,8 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         logoutUser: () => {
+            localStorage.removeItem("snsUser")
+            localStorage.removeItem("snsToken")
             return {
                 user: {},
                 token: "",
@@ -52,6 +66,8 @@ const authSlice = createSlice({
             state.loading = true
         },
         [signinUser.fulfilled]: (state, action) => {
+            localStorage.setItem("snsUser", JSON.stringify(action.payload.user))
+            localStorage.setItem("snsToken", JSON.stringify(action.payload.token))
             state.user = action.payload.user
             state.token = action.payload.token
             state.error = ""
